@@ -5,9 +5,11 @@
 <img src="https://user-images.githubusercontent.com/87380790/126421090-a9d87bef-41db-43bb-a3f8-8ea037608ea4.PNG" width="60%">
  
 ### Java Swing base Omok game, Place five stones in a row!
-
-
+  
 ---
+  
+<br/>
+  
 
 <img src="https://user-images.githubusercontent.com/87380790/126421163-054663fa-f74d-4dd4-92b4-93d3b2fbe4dd.gif" width="60%">
  
@@ -21,6 +23,8 @@
  
  
 ---
+  
+<br/>
  
  
 <img src="https://user-images.githubusercontent.com/87380790/126421346-6d0ad9db-6c39-4665-99c8-d055682ab39d.PNG" width="60%">
