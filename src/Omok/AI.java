@@ -1,12 +1,3 @@
-/*	** ÇØ¾ß ÇÒ °Í **
- * 	1. 17*17 ÀÌ»óÀÇ ºÎºĞÀÏ ¶§, ÆÇÁ¤ ¿À·ù
- *  2. ÇÃ·¹ÀÌ¾î°¡ µ¹À» µÎ¸é ¹Ù·Î¹Ù·Î Èòµ¹ÀÌ µÖÁö´Â °ÍÀÌ ¾Æ´Ñ ½Ã°£Â÷¸¦ µÎ°ÔÇÏ´Â ¾Ë°í¸®Áò ±¸Çö (Èæ,¹éÀÌ ¸ğµÎ ³¡³ª¾ß screenDraw°¡ µ¹¾Æ°¨)
- *  3. »ï»ï ±İÁö ¾Ë°í¸®Áò Ãß°¡ ¿©ºÎ
- *  
- *  *. reCheck·Î ÀÎÇØ 211102·Î ¸·¾Ò´Âµ¥µµ 0¿¡ ¶Ç ¸·À½ (Çà¿¡¼­ ¹ß°ß, Ãß°¡ ¹®Á¦ ½Ã Âü°í)
- *  *. 11011, 11101, 10111 ¾Ë°í¸®ÁòÀÌ returnNumÀÌ 1111ÀÌ¸é ÆĞ½ºµÇ°Ô µÇ¾îÀÖÀ½ (¹®Á¦ ½Ã Âü°í)
- */
-
 package Omok;
 
 public class AI {
@@ -31,8 +22,8 @@ public class AI {
 		this.map = map;
 	}
 	
-	public void alphaOh() {					// state·Î ÀÎ°øÁö´ÉÀÇ »óÅÂ¸¦ ³ª´² »óÅÂº°·Î ÇÒ ¼ö ÀÖ´Â Çàµ¿À» ÇÏ°Ô ÇÏ´Â ÇÔ¼ö (AI Á¾ÇÕ ÄÁÆ®·Ñ ÇÔ¼ö)
-		/*	// ** ¿©±â´Ù ÇÏ¸é 0.5ÃÊ µÚ¿¡  Èæµ¹ÀÌ¶û °°ÀÌ ³ª¿È (¹éµ¹¸¸ ´À¸®°Ô ³ª¿Í¾ß ÇÔ) **
+	public void alphaOh() {					// stateë¡œ ì¸ê³µì§€ëŠ¥ì˜ ìƒíƒœë¥¼ ë‚˜ëˆ  ìƒíƒœë³„ë¡œ í•  ìˆ˜ ìˆëŠ” í–‰ë™ì„ í•˜ê²Œ í•˜ëŠ” í•¨ìˆ˜ (AI ì¢…í•© ì»¨íŠ¸ë¡¤ í•¨ìˆ˜)
+		/*	// ** ì—¬ê¸°ë‹¤ í•˜ë©´ 0.5ì´ˆ ë’¤ì—  í‘ëŒì´ë‘ ê°™ì´ ë‚˜ì˜´ (ë°±ëŒë§Œ ëŠë¦¬ê²Œ ë‚˜ì™€ì•¼ í•¨) **
 		try{
 			Thread.sleep(500);
 		}catch(Exception e){
@@ -40,53 +31,53 @@ public class AI {
 		}		
 		*/
 		//if(map.endTurn == true) {
-			currentAI = CheckAI();			// ÇöÀç ¸ÊÀ» ½ºÄµÇÏ¿© ³ª¿Â °ª¿¡ µû¶ó Çàµ¿
+			currentAI = CheckAI();			// í˜„ì¬ ë§µì„ ìŠ¤ìº”í•˜ì—¬ ë‚˜ì˜¨ ê°’ì— ë”°ë¼ í–‰ë™
 			if(reCheck==true)
 				currentAI = CheckAI();
 			for(int i=0; i<19; i++) {
-				if (stopAlphaOh) break;		// µÎ ¹ø¤Š for¹® ºüÁ®³ª°¡±â (ÇÑ ¹ø ÀÛµ¿ÇÒ ¶§ ¿©·¯¹øÀÇ »óÅÂ º¯°æÀ» ¹æÁöÇÏ±â À§ÇØ for ¹®À» µÎ ¹ø ºüÁ®³ª°¡±â À§ÇÑ ÄÚµå. return ±â´É)
+				if (stopAlphaOh) break;		// ë‘ ë²ˆÂŠ forë¬¸ ë¹ ì ¸ë‚˜ê°€ê¸° (í•œ ë²ˆ ì‘ë™í•  ë•Œ ì—¬ëŸ¬ë²ˆì˜ ìƒíƒœ ë³€ê²½ì„ ë°©ì§€í•˜ê¸° ìœ„í•´ for ë¬¸ì„ ë‘ ë²ˆ ë¹ ì ¸ë‚˜ê°€ê¸° ìœ„í•œ ì½”ë“œ. return ê¸°ëŠ¥)
 				for(int j=0; j<19; j++) {
-					if(state==0 && map.getMap(i, j) == 1 && cnt==0) {		// Ã¹¹øÂ° µ¹ -  ¹«Á¶°Ç Èæµ¹ÀÇ ¿À¸¥ÂÊ ´ë°¢¼± À§ ½ÃÀÛ
-						if(i==18 && j==0) {	// Èæµ¹ÀÌ Ã¹ µ¹À» (¸Ç ¿À¸¥ÂÊ, ¸Ç À§)¿¡ µ×À» ¶§
+					if(state==0 && map.getMap(i, j) == 1 && cnt==0) {		// ì²«ë²ˆì§¸ ëŒ -  ë¬´ì¡°ê±´ í‘ëŒì˜ ì˜¤ë¥¸ìª½ ëŒ€ê°ì„  ìœ„ ì‹œì‘
+						if(i==18 && j==0) {	// í‘ëŒì´ ì²« ëŒì„ (ë§¨ ì˜¤ë¥¸ìª½, ë§¨ ìœ„)ì— ë’€ì„ ë•Œ
 							x=i-1;
 							y=j+1;
 						}
-						else if(i==18) {	// Èæµ¹ÀÌ Ã¹ µ¹À» (¸Ç ¿À¸¥ÂÊ)¿¡ µ×À» ¶§
+						else if(i==18) {	// í‘ëŒì´ ì²« ëŒì„ (ë§¨ ì˜¤ë¥¸ìª½)ì— ë’€ì„ ë•Œ
 							x=i-1;
 							y=j-1;
 						}
-						else if(j==0) {		// Èæµ¹ÀÌ Ã¹ µ¹À» (¸Ç À§)¿¡ µ×À» ¶§
+						else if(j==0) {		// í‘ëŒì´ ì²« ëŒì„ (ë§¨ ìœ„)ì— ë’€ì„ ë•Œ
 							x=i+1;
 							y=j+1;
 						}
-						else {				// Æò»ó ½Ã
+						else {				// í‰ìƒ ì‹œ
 							x=i+1;
 							y=j-1;
 						}
 						map.setMap(x, y);
 						cnt++;
-						stopAlphaOh=true;	// return ±â´É È°¼ºÈ­
-						break;				// Ã¹ ¹øÂ° for¹® ºüÁ®³ª°¡±â
+						stopAlphaOh=true;	// return ê¸°ëŠ¥ í™œì„±í™”
+						break;				// ì²« ë²ˆì§¸ forë¬¸ ë¹ ì ¸ë‚˜ê°€ê¸°
 					}
-					else if((state==0 && map.getMap(i, j) == 2 && cnt==1)) {	// µ¹ÀÌ ÀÌ¾îÁö´Â°Ô ¾øÀ» ¶§ - ¾ç ¿·ÀÌ ¿­·ÁÀÖ´Â °÷À¸·Î µÒ
+					else if((state==0 && map.getMap(i, j) == 2 && cnt==1)) {	// ëŒì´ ì´ì–´ì§€ëŠ”ê²Œ ì—†ì„ ë•Œ - ì–‘ ì˜†ì´ ì—´ë ¤ìˆëŠ” ê³³ìœ¼ë¡œ ë‘ 
 						int blank[]= {0,0,0,0,0,0,0,0};	
-						/* [0	1 	2	(ÀÎµ¦½º)
-						 *  3	¹é	4	 Â¦ - (0,7) (1,6) (2,5) (3,4)
+						/* [0	1 	2	(ì¸ë±ìŠ¤)
+						 *  3	ë°±	4	 ì§ - (0,7) (1,6) (2,5) (3,4)
 						 *  5	6	7] */
 						int count=0;
 						boolean stopCount=false;
 						
 						for(int k=-1; k<2; k++) {
-							if (stopCount == true) break;					// 3Áß for¹® ³ª°¡±â
+							if (stopCount == true) break;					// 3ì¤‘ forë¬¸ ë‚˜ê°€ê¸°
 							for(int l=-1; l<2; l++) {
-								if(k==0 && l==0) continue;					// ÇØ´ç ¹éµ¹Àº °Ç³Ê¶Ù±â
+								if(k==0 && l==0) continue;					// í•´ë‹¹ ë°±ëŒì€ ê±´ë„ˆë›°ê¸°
 								if(map.getMap(i+l, j+k) == 0) {
 									blank[count] = 1;
 								}
 								System.out.print(blank[count] + " ");
 								count++;
 								for(int p=0; p<4; p++) {
-									if (blank[p]==1 && blank[7-p]==1 && 0<=i+l && i+l<=18 && 0<=j+k && j+k<=18 && map.getMap(i+l, j+k)==0) {		// ¾ç ¿·ÀÌ ¿­·ÁÀÖ´Â °÷ ¿ì¼±À¸·Î µÒ		
+									if (blank[p]==1 && blank[7-p]==1 && 0<=i+l && i+l<=18 && 0<=j+k && j+k<=18 && map.getMap(i+l, j+k)==0) {		// ì–‘ ì˜†ì´ ì—´ë ¤ìˆëŠ” ê³³ ìš°ì„ ìœ¼ë¡œ ë‘ 		
 										map.setMap(i+l,j+k);
 										stopCount = true;
 										break;
@@ -100,8 +91,8 @@ public class AI {
 						stopAlphaOh=true;
 						break;
 					}
-					else if(state==1) {										// ¹æ¾î »óÅÂ, Èæµ¹ÀÇ ¿¬¼ÓÀÌ 3°³ ÀÌ»óÀÏ ¶§ ¹æ¾î
-						if(currentAI == 2222 || (currentAI != 111 && currentAI != 1111)) {	// ¿ì¼± ¼øÀ§ ¼³Á¤
+					else if(state==1) {										// ë°©ì–´ ìƒíƒœ, í‘ëŒì˜ ì—°ì†ì´ 3ê°œ ì´ìƒì¼ ë•Œ ë°©ì–´
+						if(currentAI == 2222 || (currentAI != 111 && currentAI != 1111)) {	// ìš°ì„  ìˆœìœ„ ì„¤ì •
 							map.setMap(attackX,attackY);
 							state = 2;
 							stopAlphaOh=true;
@@ -113,8 +104,8 @@ public class AI {
 							break;
 						}
 					}
-					else if(state==2) {										// °ø°İ »óÅÂ, ÀÚ½ÅÀÇ µ¹À» ÀÌ¾î°¨ 
-						if(currentAI!=2222 && (currentAI == 111 || currentAI == 1111)) {	// ¿ì¼± ¼øÀ§ ¼³Á¤
+					else if(state==2) {										// ê³µê²© ìƒíƒœ, ìì‹ ì˜ ëŒì„ ì´ì–´ê° 
+						if(currentAI!=2222 && (currentAI == 111 || currentAI == 1111)) {	// ìš°ì„  ìˆœìœ„ ì„¤ì •
 							map.setMap(blockX,blockY);
 							state = 1;
 							stopAlphaOh=true;
@@ -131,8 +122,8 @@ public class AI {
 			}
 		//}
 		map.turnChange();
-		map.endTurn=false;			// º¸°í ¾ø¾Öµµ µÉ µí
-		//mouse.printText(x, y);	// ** ¹éµ¹ À§Ä¡ Ãâ·Â ÇÔ¼ö, x°¡ ÀÌÀü xº¸´Ù ³·À» ½Ã ¾Èµé¾î°¨ **
+		map.endTurn=false;			// ë³´ê³  ì—†ì• ë„ ë  ë“¯
+		//mouse.printText(x, y);	// ** ë°±ëŒ ìœ„ì¹˜ ì¶œë ¥ í•¨ìˆ˜, xê°€ ì´ì „ xë³´ë‹¤ ë‚®ì„ ì‹œ ì•ˆë“¤ì–´ê° **
 	}
 	
 	public void resetAI() {
@@ -149,7 +140,7 @@ public class AI {
 		attackY=20;
 	}
 	
-	public int CheckAI() {		// AI state Á¾ÇÕ Ã¼Å© , 1°ú 2ÀÇ °³¼ö´Â ¿ì¼±¼øÀ§ Â÷ÀÌ (¸¹À»¼ö·Ï ¿ì¼±)
+	public int CheckAI() {		// AI state ì¢…í•© ì²´í¬ , 1ê³¼ 2ì˜ ê°œìˆ˜ëŠ” ìš°ì„ ìˆœìœ„ ì°¨ì´ (ë§ì„ìˆ˜ë¡ ìš°ì„ )
 		if (CheckFieldForAI()==2222 || CheckRecordForAI ()==2222 || CheckLDiagonalForAI()==2222 || CheckRDiagonalForAI()==2222) {
 			state=2;
 			System.out.println("return 2222");
@@ -183,19 +174,19 @@ public class AI {
 		return 0;
 	}
 	
-	public int CheckFieldForAI() {		// AIÀÇ Çà Ã¼Å© (±âÁØÁ¡À¸·Î ºÎÅÍ ¾Æ·¡·Î)
+	public int CheckFieldForAI() {		// AIì˜ í–‰ ì²´í¬ (ê¸°ì¤€ì ìœ¼ë¡œ ë¶€í„° ì•„ë˜ë¡œ)
 		for(int x=0;x<19;x++){
 			if(stopChecking) break;
 			for(int y=0;y<16;y++){
-				if(((map.getMap(x,y) == 1) && (map.getMap(x,y+1) == 1) && (map.getMap(x,y+2) == 1)) 	// AI - 3¿¬¼Ó Èæµ¹ ¹æ¾î
+				if(((map.getMap(x,y) == 1) && (map.getMap(x,y+1) == 1) && (map.getMap(x,y+2) == 1)) 	// AI - 3ì—°ì† í‘ëŒ ë°©ì–´
 						&& ((map.getBlockedMap(x,y) != 1) && (map.getBlockedMap(x,y+1) != 1) && (map.getBlockedMap(x,y+2) != 1))) {
 					if(returningNum!=2222 && returningNum!=1111) {
-						if((y-2>=0 && map.getMap(x, y-2)==1) && (y-1>=0 && map.getMap(x,y-1)==0)) {			// 10111 ¹æ¾î
+						if((y-2>=0 && map.getMap(x, y-2)==1) && (y-1>=0 && map.getMap(x,y-1)==0)) {			// 10111 ë°©ì–´
 							blockX=x;
 							blockY=y-1;
 							returningNum =1111;
 						}
-						else if(map.getMap(x,y+4)==1 && map.getMap(x,y+3)==0) {		// 11101 ¹æ¾î
+						else if(map.getMap(x,y+4)==1 && map.getMap(x,y+3)==0) {		// 11101 ë°©ì–´
 							blockX=x;
 							blockY=y+3;
 							returningNum =1111;
@@ -204,7 +195,7 @@ public class AI {
 							if(((y-1>=0 && map.getMap(x, y-1)==2) || map.getMap(x, y+3)==2) && reCheck==false) {
 								continue;
 							}
-							if((y-1>=0 && map.getMap(x,y-1)==0) && map.getMap(x, y+4)==2) {		// ÁøÇàÇÏ·Á´Â °÷ ´ÙÀ½ °÷ÀÌ ¸·ÇôÀÖÀ» °æ¿ì ´Ù¸¥ ¹æÇâÀ¸·Î ÁøÇà
+							if((y-1>=0 && map.getMap(x,y-1)==0) && map.getMap(x, y+4)==2) {		// ì§„í–‰í•˜ë ¤ëŠ” ê³³ ë‹¤ìŒ ê³³ì´ ë§‰í˜€ìˆì„ ê²½ìš° ë‹¤ë¥¸ ë°©í–¥ìœ¼ë¡œ ì§„í–‰
 								blockX=x;
 								blockY=y-1;
 							}
@@ -225,12 +216,12 @@ public class AI {
 							}	
 							returningNum = 111;
 						}
-						map.blockedMap[x][y]=1;			// ÇÑ¹ø Ã¼Å© ÇÏ°í ´ÙÀ½ ÅÏ¿¡ ¶Ç ´Ù½Ã Ã¼Å©µÇ´Â °ÍÀ» ¹æÁö
+						map.blockedMap[x][y]=1;			// í•œë²ˆ ì²´í¬ í•˜ê³  ë‹¤ìŒ í„´ì— ë˜ ë‹¤ì‹œ ì²´í¬ë˜ëŠ” ê²ƒì„ ë°©ì§€
 						map.blockedMap[x][y+1]=1;
 						map.blockedMap[x][y+2]=1;
 					}
 				}
-				if(((map.getMap(x,y) == 1) && (map.getMap(x,y+1) == 1) && (map.getMap(x,y+2) == 1) && (map.getMap(x,y+3) == 1)) // AI - 4¿¬¼Ó Èæµ¹ ¹æ¾î
+				if(((map.getMap(x,y) == 1) && (map.getMap(x,y+1) == 1) && (map.getMap(x,y+2) == 1) && (map.getMap(x,y+3) == 1)) // AI - 4ì—°ì† í‘ëŒ ë°©ì–´
 						&& ((map.getBlockedMap(x,y) != 2) && (map.getBlockedMap(x,y+1) != 2) && (map.getBlockedMap(x,y+2) != 2) && (map.getBlockedMap(x,y+3) != 2))) {
 					if(returningNum!=2222) {
 						if(y-1>=0 && map.getMap(x,y-1)==0) {
@@ -254,7 +245,7 @@ public class AI {
 				}
 
 				if(((map.getMap(x,y) == 2) && (map.getMap(x,y+1) == 2)) &&
-						((map.getBlockedMap(x,y) != 3) && (map.getBlockedMap(x,y+1) != 3))) {// AI - 2¿¬¼Ó ¹éµ¹ °ø°İ
+						((map.getBlockedMap(x,y) != 3) && (map.getBlockedMap(x,y+1) != 3))) {// AI - 2ì—°ì† ë°±ëŒ ê³µê²©
 					if(returningNum==0) {
 						if(((y-1>=0 && map.getMap(x, y-1)==1) || map.getMap(x, y+2)==1) && reCheck==false) {
 							continue;
@@ -277,14 +268,14 @@ public class AI {
 				}
 				
 				if(((map.getMap(x,y) == 2) && (map.getMap(x,y+1) == 2) && (map.getMap(x,y+2) == 2)) &&			
-						((map.getBlockedMap(x,y) != 4) && (map.getBlockedMap(x,y+1) != 4) && (map.getBlockedMap(x,y+2) != 4)))  {	// AI - 3¿¬¼Ó ¹éµ¹ °ø°İ
+						((map.getBlockedMap(x,y) != 4) && (map.getBlockedMap(x,y+1) != 4) && (map.getBlockedMap(x,y+2) != 4)))  {	// AI - 3ì—°ì† ë°±ëŒ ê³µê²©
 					if(returningNum!=1111 && returningNum!=2222) {
-						if((y-2>=0 && map.getMap(x, y-2)==2) && (y-1>=0 && map.getMap(x,y-1)==0)) {			// 10111 °ø°İ
+						if((y-2>=0 && map.getMap(x, y-2)==2) && (y-1>=0 && map.getMap(x,y-1)==0)) {			// 10111 ê³µê²©
 							attackX=x;
 							attackY=y-1;
 							returningNum =2222;
 						}
-						else if(map.getMap(x,y+4)==2 && map.getMap(x,y+3)==0) {		// 11101 °ø°İ
+						else if(map.getMap(x,y+4)==2 && map.getMap(x,y+3)==0) {		// 11101 ê³µê²©
 							attackX=x;
 							attackY=y+3;
 							returningNum =2222;
@@ -293,7 +284,7 @@ public class AI {
 							if(((y-1>=0 && map.getMap(x, y-1)==1) || map.getMap(x, y+3)==1) && reCheck==false) {
 								continue;
 							}
-							if((y-1>=0 && map.getMap(x,y-1)==0) && map.getMap(x, y+4)==1) {		// ÁøÇàÇÏ·Á´Â °÷ ´ÙÀ½ °÷ÀÌ ¸·ÇôÀÖÀ» °æ¿ì ´Ù¸¥ ¹æÇâÀ¸·Î ÁøÇà
+							if((y-1>=0 && map.getMap(x,y-1)==0) && map.getMap(x, y+4)==1) {		// ì§„í–‰í•˜ë ¤ëŠ” ê³³ ë‹¤ìŒ ê³³ì´ ë§‰í˜€ìˆì„ ê²½ìš° ë‹¤ë¥¸ ë°©í–¥ìœ¼ë¡œ ì§„í–‰
 								attackX=x;
 								attackX=y-1;
 							}
@@ -320,7 +311,7 @@ public class AI {
 					}
 				}
 				
-				if(((map.getMap(x,y) == 2) && (map.getMap(x,y+1) == 2) && (map.getMap(x,y+2) == 2) && (map.getMap(x,y+3) == 2)) &&	// AI - 4¿¬¼Ó ¹éµ¹ °ø°İ
+				if(((map.getMap(x,y) == 2) && (map.getMap(x,y+1) == 2) && (map.getMap(x,y+2) == 2) && (map.getMap(x,y+3) == 2)) &&	// AI - 4ì—°ì† ë°±ëŒ ê³µê²©
 						((map.getBlockedMap(x,y) != 5) && (map.getBlockedMap(x,y+1) != 5) && (map.getBlockedMap(x,y+2) != 5) && (map.getBlockedMap(x,y+3) != 5))) {
 					if(y-1>=0 && map.getMap(x,y-1)==0) {
 						attackX=x;
@@ -341,7 +332,7 @@ public class AI {
 					returningNum = 2222;
 				}
 				
-				if(((map.getMap(x,y) == 1) && (map.getMap(x,y+1) == 0) && (map.getMap(x,y+2) == 1) && (map.getMap(x,y+3) == 1)) 	// AI - 1011 ¹æ¾î
+				if(((map.getMap(x,y) == 1) && (map.getMap(x,y+1) == 0) && (map.getMap(x,y+2) == 1) && (map.getMap(x,y+3) == 1)) 	// AI - 1011 ë°©ì–´
 						&& ((map.getBlockedMap(x,y) != 6) && (map.getBlockedMap(x,y+1) != 6) && (map.getBlockedMap(x,y+2) != 6) && (map.getBlockedMap(x,y+3) != 6))) {
 					if(returningNum!=2222 && returningNum!=1111) {
 						if(((y-1>=0 && map.getMap(x, y-1)==2) || map.getMap(x, y+4)==2) && reCheck==false) {
@@ -357,7 +348,7 @@ public class AI {
 						returningNum = 111;
 					}
 				}
-				if(((map.getMap(x,y) == 1) && (map.getMap(x,y+1) == 1) && (map.getMap(x,y+2) == 0) && (map.getMap(x,y+3) == 1)) 	// AI - 1101 ¹æ¾î, 11011 ¹æ¾î
+				if(((map.getMap(x,y) == 1) && (map.getMap(x,y+1) == 1) && (map.getMap(x,y+2) == 0) && (map.getMap(x,y+3) == 1)) 	// AI - 1101 ë°©ì–´, 11011 ë°©ì–´
 						&& ((map.getBlockedMap(x,y) != 7) && (map.getBlockedMap(x,y+1) != 7) && (map.getBlockedMap(x,y+2) != 7) && (map.getBlockedMap(x,y+3) != 7))) {
 					if(returningNum!=2222 && returningNum!=1111) {
 						if(map.getMap(x, y+4)==1) {
@@ -387,7 +378,7 @@ public class AI {
 					}
 				}
 				
-				if(((map.getMap(x,y) == 2) && (map.getMap(x,y+1) == 0) && (map.getMap(x,y+2) == 2) && (map.getMap(x,y+3) == 2)) 	// AI - 1011 °ø°İ
+				if(((map.getMap(x,y) == 2) && (map.getMap(x,y+1) == 0) && (map.getMap(x,y+2) == 2) && (map.getMap(x,y+3) == 2)) 	// AI - 1011 ê³µê²©
 						&& ((map.getBlockedMap(x,y) != 9) && (map.getBlockedMap(x,y+1) != 9) && (map.getBlockedMap(x,y+2) != 9) && (map.getBlockedMap(x,y+3) != 9))) {
 					if(returningNum!=1111 && returningNum!=2222) {
 						if(((y-1>=0 && map.getMap(x, y-1)==1) || map.getMap(x, y+4)==1) && reCheck==false) {
@@ -403,7 +394,7 @@ public class AI {
 						returningNum = 222;
 					}
 				}
-				if(((map.getMap(x,y) == 2) && (map.getMap(x,y+1) == 2) && (map.getMap(x,y+2) == 0) && (map.getMap(x,y+3) == 2)) 	// AI - 1101 °ø°İ, 11011 °ø°İ
+				if(((map.getMap(x,y) == 2) && (map.getMap(x,y+1) == 2) && (map.getMap(x,y+2) == 0) && (map.getMap(x,y+3) == 2)) 	// AI - 1101 ê³µê²©, 11011 ê³µê²©
 						&& ((map.getBlockedMap(x,y) != 10) && (map.getBlockedMap(x,y+1) != 10) && (map.getBlockedMap(x,y+2) != 10) && (map.getBlockedMap(x,y+3) != 10))) {
 					if(returningNum!=2222 && returningNum!=1111) {
 						if(map.getMap(x,y+4)==2) {
@@ -437,19 +428,19 @@ public class AI {
 		return returningNum;
 	}
 	
-	public int CheckRecordForAI() {		// AIÀÇ ¿­ Ã¼Å© (±âÁØÁ¡À¸·Î ºÎÅÍ ¿À¸¥ÂÊÀ¸·Î)
+	public int CheckRecordForAI() {		// AIì˜ ì—´ ì²´í¬ (ê¸°ì¤€ì ìœ¼ë¡œ ë¶€í„° ì˜¤ë¥¸ìª½ìœ¼ë¡œ)
 		for(int x=0;x<16;x++){
 			if(stopChecking) break;
 			for(int y=0;y<19;y++){
-				if(((map.getMap(x,y) == 1) && (map.getMap(x+1,y) == 1) && (map.getMap(x+2,y) == 1)) 									// AI - 3¿¬¼Ó Èæµ¹ ¹æ¾î
+				if(((map.getMap(x,y) == 1) && (map.getMap(x+1,y) == 1) && (map.getMap(x+2,y) == 1)) 									// AI - 3ì—°ì† í‘ëŒ ë°©ì–´
 						&& ((map.getBlockedMap(x,y) != 11) && (map.getBlockedMap(x+1,y) != 11) && (map.getBlockedMap(x+2,y) != 11))) {
 					if(returningNum!=2222 && returningNum!=1111) {
-						if((x-2>=0 && map.getMap(x-2, y)==1) && (x-1>=0 && map.getMap(x-1,y)==0)) {			// 10111 ¹æ¾î
+						if((x-2>=0 && map.getMap(x-2, y)==1) && (x-1>=0 && map.getMap(x-1,y)==0)) {			// 10111 ë°©ì–´
 							blockX=x-1;
 							blockY=y;
 							returningNum =1111;
 						}
-						else if(map.getMap(x+4,y)==1 && map.getMap(x+3,y)==0) {		// 11101 ¹æ¾î
+						else if(map.getMap(x+4,y)==1 && map.getMap(x+3,y)==0) {		// 11101 ë°©ì–´
 							blockX=x+3;
 							blockY=y;
 							returningNum =1111;
@@ -458,7 +449,7 @@ public class AI {
 							if(((x-1>=0 && map.getMap(x-1, y)==2) || map.getMap(x+3, y)==2) && reCheck==false) {
 								continue;
 							}
-							if((x-1>=0 && map.getMap(x-1,y)==0) && map.getMap(x+4, y)==2) {		// ÁøÇàÇÏ·Á´Â °÷ ´ÙÀ½ °÷ÀÌ ¸·ÇôÀÖÀ» °æ¿ì ´Ù¸¥ ¹æÇâÀ¸·Î ÁøÇà
+							if((x-1>=0 && map.getMap(x-1,y)==0) && map.getMap(x+4, y)==2) {		// ì§„í–‰í•˜ë ¤ëŠ” ê³³ ë‹¤ìŒ ê³³ì´ ë§‰í˜€ìˆì„ ê²½ìš° ë‹¤ë¥¸ ë°©í–¥ìœ¼ë¡œ ì§„í–‰
 								blockX=x-1;
 								blockY=y;
 							}
@@ -485,7 +476,7 @@ public class AI {
 					}
 				}
 				
-				if(((map.getMap(x,y) == 1) && (map.getMap(x+1,y) == 1) && (map.getMap(x+2,y) == 1) && (map.getMap(x+3,y) == 1)) 	// AI - 4¿¬¼Ó Èæµ¹ ¹æ¾î
+				if(((map.getMap(x,y) == 1) && (map.getMap(x+1,y) == 1) && (map.getMap(x+2,y) == 1) && (map.getMap(x+3,y) == 1)) 	// AI - 4ì—°ì† í‘ëŒ ë°©ì–´
 						&& ((map.getBlockedMap(x,y) != 12) && (map.getBlockedMap(x+1,y) != 12) && (map.getBlockedMap(x+2,y) != 12) && (map.getBlockedMap(x+3,y) != 12))) {
 					if(returningNum!=2222) {
 						if(x-1>=0 && map.getMap(x-1,y)==0) {
@@ -509,7 +500,7 @@ public class AI {
 				}
 
 				if(((map.getMap(x,y) == 2) && (map.getMap(x+1,y) == 2)) &&
-						((map.getBlockedMap(x,y) != 13) && (map.getBlockedMap(x+1,y) != 13))) {											// AI - 2¿¬¼Ó ¹éµ¹ °ø°İ
+						((map.getBlockedMap(x,y) != 13) && (map.getBlockedMap(x+1,y) != 13))) {											// AI - 2ì—°ì† ë°±ëŒ ê³µê²©
 					if(returningNum==0) {
 						if(((x-1>=0 && map.getMap(x-1, y)==1) || map.getMap(x+2, y)==1) && reCheck==false) {
 							continue;
@@ -533,14 +524,14 @@ public class AI {
 				}
 				
 				if(((map.getMap(x,y) == 2) && (map.getMap(x+1,y) == 2) && (map.getMap(x+2,y) == 2)) &&			
-						((map.getBlockedMap(x,y) != 14) && (map.getBlockedMap(x+1,y) != 14) && (map.getBlockedMap(x+2,y) != 14)))  {	// AI - 3¿¬¼Ó ¹éµ¹ °ø°İ
+						((map.getBlockedMap(x,y) != 14) && (map.getBlockedMap(x+1,y) != 14) && (map.getBlockedMap(x+2,y) != 14)))  {	// AI - 3ì—°ì† ë°±ëŒ ê³µê²©
 					if(returningNum!=1111) {
-						if((x-2>=0 && map.getMap(x-2, y)==2) && map.getMap(x-1,y)==0) {			// 10111 °ø°İ
+						if((x-2>=0 && map.getMap(x-2, y)==2) && map.getMap(x-1,y)==0) {			// 10111 ê³µê²©
 							attackX=x-1;
 							attackY=y;
 							returningNum =2222;
 						}
-						else if(map.getMap(x+4,y)==2 && map.getMap(x+3,y)==0) {		// 11101 °ø°İ
+						else if(map.getMap(x+4,y)==2 && map.getMap(x+3,y)==0) {		// 11101 ê³µê²©
 							attackX=x+3;
 							attackY=y;
 							returningNum =2222;
@@ -549,7 +540,7 @@ public class AI {
 							if(((x-1>=0 && map.getMap(x-1, y)==1) || map.getMap(x+3, y)==1) && reCheck==false) {
 								continue;
 							}
-							if((x-1>=0 && map.getMap(x-1,y)==0) && map.getMap(x+4, y)==1) {		// ÁøÇàÇÏ·Á´Â °÷ ´ÙÀ½ °÷ÀÌ ¸·ÇôÀÖÀ» °æ¿ì ´Ù¸¥ ¹æÇâÀ¸·Î ÁøÇà
+							if((x-1>=0 && map.getMap(x-1,y)==0) && map.getMap(x+4, y)==1) {		// ì§„í–‰í•˜ë ¤ëŠ” ê³³ ë‹¤ìŒ ê³³ì´ ë§‰í˜€ìˆì„ ê²½ìš° ë‹¤ë¥¸ ë°©í–¥ìœ¼ë¡œ ì§„í–‰
 								attackX=x-1;
 								attackY=y;
 							}
@@ -575,7 +566,7 @@ public class AI {
 						map.blockedMap[x+2][y]=14;						
 					}
 				}
-				if(((map.getMap(x,y) == 2) && (map.getMap(x+1,y) == 2) && (map.getMap(x+2,y) == 2) && (map.getMap(x+3,y) == 2)) &&	// AI - 4¿¬¼Ó ¹éµ¹ °ø°İ
+				if(((map.getMap(x,y) == 2) && (map.getMap(x+1,y) == 2) && (map.getMap(x+2,y) == 2) && (map.getMap(x+3,y) == 2)) &&	// AI - 4ì—°ì† ë°±ëŒ ê³µê²©
 						((map.getBlockedMap(x,y) != 15) && (map.getBlockedMap(x+1,y) != 15) && (map.getBlockedMap(x+2,y) != 15) && (map.getBlockedMap(x+3,y) != 15))) {
 					if(x-1>=0 && map.getMap(x-1,y)==0) {
 						attackX=x-1;
@@ -596,7 +587,7 @@ public class AI {
 					returningNum = 2222;
 				}
 				
-				if(((map.getMap(x,y) == 1) && (map.getMap(x+1,y) == 0) && (map.getMap(x+2,y) == 1) && (map.getMap(x+3,y) == 1)) 	// AI - 1011 ¹æ¾î
+				if(((map.getMap(x,y) == 1) && (map.getMap(x+1,y) == 0) && (map.getMap(x+2,y) == 1) && (map.getMap(x+3,y) == 1)) 	// AI - 1011 ë°©ì–´
 						&& ((map.getBlockedMap(x,y) != 16) && (map.getBlockedMap(x+1,y) != 16) && (map.getBlockedMap(x+2,y) != 16) && (map.getBlockedMap(x+3,y) != 16))) {
 					if(returningNum!=2222 && returningNum!=1111) {
 						if(((x-1>=0 && map.getMap(x-1, y)==2) || map.getMap(x+4, y)==2) && reCheck==false) {
@@ -612,7 +603,7 @@ public class AI {
 						returningNum = 111;
 					}
 				}
-				if(((map.getMap(x,y) == 1) && (map.getMap(x+1,y) == 1) && (map.getMap(x+2,y) == 0) && (map.getMap(x+3,y) == 1)) 	// AI - 1101 ¹æ¾î, 11011 ¹æ¾î
+				if(((map.getMap(x,y) == 1) && (map.getMap(x+1,y) == 1) && (map.getMap(x+2,y) == 0) && (map.getMap(x+3,y) == 1)) 	// AI - 1101 ë°©ì–´, 11011 ë°©ì–´
 						&& ((map.getBlockedMap(x,y) != 17) && (map.getBlockedMap(x+1,y) != 17) && (map.getBlockedMap(x+2,y) != 17) && (map.getBlockedMap(x+3,y) != 17))) {
 					if(returningNum!=2222 && returningNum!=1111) {
 						if(map.getMap(x+4, y)==1) {
@@ -642,7 +633,7 @@ public class AI {
 					}
 				}
 				
-				if(((map.getMap(x,y) == 2) && (map.getMap(x+1,y) == 0) && (map.getMap(x+2,y) == 2) && (map.getMap(x+3,y) == 2)) 	// AI - 1011 °ø°İ
+				if(((map.getMap(x,y) == 2) && (map.getMap(x+1,y) == 0) && (map.getMap(x+2,y) == 2) && (map.getMap(x+3,y) == 2)) 	// AI - 1011 ê³µê²©
 						&& ((map.getBlockedMap(x,y) != 19) && (map.getBlockedMap(x+1,y) != 19) && (map.getBlockedMap(x+2,y) != 19) && (map.getBlockedMap(x+3,y) != 19))) {
 					if(returningNum!=1111 && returningNum!=2222) {
 						if((x-1>=0 && map.getMap(x-1, y)==1) || map.getMap(x+4, y)==1 && reCheck==false) {
@@ -658,7 +649,7 @@ public class AI {
 						returningNum = 222;
 					}
 				}
-				if(((map.getMap(x,y) == 2) && (map.getMap(x+1,y) == 2) && (map.getMap(x+2,y) == 0) && (map.getMap(x+3,y) == 2)) 	// AI - 1101 °ø°İ, 11011 °ø°İ
+				if(((map.getMap(x,y) == 2) && (map.getMap(x+1,y) == 2) && (map.getMap(x+2,y) == 0) && (map.getMap(x+3,y) == 2)) 	// AI - 1101 ê³µê²©, 11011 ê³µê²©
 						&& ((map.getBlockedMap(x,y) != 20) && (map.getBlockedMap(x+1,y) != 20) && (map.getBlockedMap(x+2,y) != 20) && (map.getBlockedMap(x+3,y) != 20))) {
 					if(returningNum!=2222 && returningNum!=1111) {
 						if(map.getMap(x+4, y)==2) {
@@ -692,20 +683,20 @@ public class AI {
 		return returningNum;
 	}
 	
-	public int CheckLDiagonalForAI() {		// AIÀÇ ¿ŞÂÊ ´ë°¢¼± Ã¼Å© (±âÁØÁ¡À¸·Î ºÎÅÍ ¿ŞÂÊ ¾Æ·¡·Î)
+	public int CheckLDiagonalForAI() {		// AIì˜ ì™¼ìª½ ëŒ€ê°ì„  ì²´í¬ (ê¸°ì¤€ì ìœ¼ë¡œ ë¶€í„° ì™¼ìª½ ì•„ë˜ë¡œ)
 		for(int x=0;x<19;x++){
 			if(stopChecking) break;
 			for(int y=0;y<19;y++){
 				if(x-4>=0 && y+4<=19){
-				if(((map.getMap(x,y) == 1) && (map.getMap(x-1,y+1) == 1) && (map.getMap(x-2,y+2) == 1)) 									// AI - 3¿¬¼Ó Èæµ¹ ¹æ¾î
+				if(((map.getMap(x,y) == 1) && (map.getMap(x-1,y+1) == 1) && (map.getMap(x-2,y+2) == 1)) 									// AI - 3ì—°ì† í‘ëŒ ë°©ì–´
 						&& ((map.getBlockedMap(x,y) != 21) && (map.getBlockedMap(x-1,y+1) != 21) && (map.getBlockedMap(x-2,y+2) != 21))) {
 					if(returningNum!=2222 && returningNum!=1111) {
-						if((y-2>=0 && map.getMap(x+2, y-2)==1) && (y-1>=0 && map.getMap(x+1,y-1)==0)) {			// 10111 ¹æ¾î
+						if((y-2>=0 && map.getMap(x+2, y-2)==1) && (y-1>=0 && map.getMap(x+1,y-1)==0)) {			// 10111 ë°©ì–´
 							blockX=x+1;
 							blockY=y-1;
 							returningNum =1111;
 						}
-						else if(map.getMap(x-4,y+4)==1 && map.getMap(x-3,y+3)==0) {		// 11101 ¹æ¾î
+						else if(map.getMap(x-4,y+4)==1 && map.getMap(x-3,y+3)==0) {		// 11101 ë°©ì–´
 							blockX=x-3;
 							blockY=y+3;
 							returningNum =1111;
@@ -714,7 +705,7 @@ public class AI {
 							if(((y-1>=0 && map.getMap(x+1, y-1)==2) || map.getMap(x-3, y+3)==2) && reCheck==false) {
 								continue;
 							}
-							if((y-1>=0 && map.getMap(x+1,y-1)==0) && map.getMap(x-4, y+4)==2) {		// ÁøÇàÇÏ·Á´Â °÷ ´ÙÀ½ °÷ÀÌ ¸·ÇôÀÖÀ» °æ¿ì ´Ù¸¥ ¹æÇâÀ¸·Î ÁøÇà
+							if((y-1>=0 && map.getMap(x+1,y-1)==0) && map.getMap(x-4, y+4)==2) {		// ì§„í–‰í•˜ë ¤ëŠ” ê³³ ë‹¤ìŒ ê³³ì´ ë§‰í˜€ìˆì„ ê²½ìš° ë‹¤ë¥¸ ë°©í–¥ìœ¼ë¡œ ì§„í–‰
 								blockX=x+1;
 								blockY=y-1;
 							}
@@ -741,7 +732,7 @@ public class AI {
 					}
 				}
 				
-				if(((map.getMap(x,y) == 1) && (map.getMap(x-1,y+1) == 1) && (map.getMap(x-2,y+2) == 1) && (map.getMap(x-3,y+3) == 1)) // AI - 4¿¬¼Ó Èæµ¹ ¹æ¾î
+				if(((map.getMap(x,y) == 1) && (map.getMap(x-1,y+1) == 1) && (map.getMap(x-2,y+2) == 1) && (map.getMap(x-3,y+3) == 1)) // AI - 4ì—°ì† í‘ëŒ ë°©ì–´
 						&& ((map.getBlockedMap(x,y) != 22) && (map.getBlockedMap(x-1,y+1) != 22) && (map.getBlockedMap(x-2,y+2) != 22) && (map.getBlockedMap(x-3,y+3) != 22))) {
 					if(returningNum!=2222) {
 						if(y-1>=0 && map.getMap(x+1,y-1)==0) {
@@ -765,7 +756,7 @@ public class AI {
 				}
 
 				if(((map.getMap(x,y) == 2) && (map.getMap(x-1,y+1) == 2)) &&
-						((map.getBlockedMap(x,y) != 23) && (map.getBlockedMap(x-1,y+1) != 23))) {											// AI - 2¿¬¼Ó ¹éµ¹ °ø°İ
+						((map.getBlockedMap(x,y) != 23) && (map.getBlockedMap(x-1,y+1) != 23))) {											// AI - 2ì—°ì† ë°±ëŒ ê³µê²©
 					if(returningNum==0) {
 						if((map.getMap(x+1, y-1)==1 || map.getMap(x-2, y+2)==1) && reCheck==false) {
 							continue;
@@ -789,14 +780,14 @@ public class AI {
 				}
 				
 				if(((map.getMap(x,y) == 2) && (map.getMap(x-1,y+1) == 2) && (map.getMap(x-2,y+2) == 2)) &&			
-						((map.getBlockedMap(x,y) != 24) && (map.getBlockedMap(x-1,y+1) != 24) && (map.getBlockedMap(x-2,y+2) != 24)))  {	// AI - 3¿¬¼Ó ¹éµ¹ °ø°İ
+						((map.getBlockedMap(x,y) != 24) && (map.getBlockedMap(x-1,y+1) != 24) && (map.getBlockedMap(x-2,y+2) != 24)))  {	// AI - 3ì—°ì† ë°±ëŒ ê³µê²©
 					if(returningNum!=1111) {
-						if((y-2>=0 && map.getMap(x+2, y-2)==2) && (y-1>=0 && map.getMap(x+1,y-1)==0)) {			// 10111 °ø°İ
+						if((y-2>=0 && map.getMap(x+2, y-2)==2) && (y-1>=0 && map.getMap(x+1,y-1)==0)) {			// 10111 ê³µê²©
 							attackX=x+1;
 							attackY=y-1;
 							returningNum =2222;
 						}
-						else if(map.getMap(x-4,y+4)==2 && map.getMap(x-3,y+3)==0) {		// 11101 °ø°İ
+						else if(map.getMap(x-4,y+4)==2 && map.getMap(x-3,y+3)==0) {		// 11101 ê³µê²©
 							attackX=x-3;
 							attackY=y+3;
 							returningNum =2222;
@@ -805,7 +796,7 @@ public class AI {
 							if(((y-1>=0 && map.getMap(x+1, y-1)==1) || map.getMap(x-3, y+3)==1) && reCheck==false) {
 								continue;
 							}
-							if((y-1>=0 && map.getMap(x+1,y-1)==0) && map.getMap(x-4, y+4)==1) {		// ÁøÇàÇÏ·Á´Â °÷ ´ÙÀ½ °÷ÀÌ ¸·ÇôÀÖÀ» °æ¿ì ´Ù¸¥ ¹æÇâÀ¸·Î ÁøÇà
+							if((y-1>=0 && map.getMap(x+1,y-1)==0) && map.getMap(x-4, y+4)==1) {		// ì§„í–‰í•˜ë ¤ëŠ” ê³³ ë‹¤ìŒ ê³³ì´ ë§‰í˜€ìˆì„ ê²½ìš° ë‹¤ë¥¸ ë°©í–¥ìœ¼ë¡œ ì§„í–‰
 								attackX=x+1;
 								attackY=y-1;
 							}
@@ -832,7 +823,7 @@ public class AI {
 					}
 				}
 					
-				if(((map.getMap(x,y) == 2) && (map.getMap(x-1,y+1) == 2) && (map.getMap(x-2,y+2) == 2) && (map.getMap(x-3,y+3) == 2)) &&// AI - 4¿¬¼Ó ¹éµ¹ °ø°İ
+				if(((map.getMap(x,y) == 2) && (map.getMap(x-1,y+1) == 2) && (map.getMap(x-2,y+2) == 2) && (map.getMap(x-3,y+3) == 2)) &&// AI - 4ì—°ì† ë°±ëŒ ê³µê²©
 						((map.getBlockedMap(x,y) != 25) && (map.getBlockedMap(x-1,y+1) != 25) && (map.getBlockedMap(x-2,y+2) != 25) && (map.getBlockedMap(x-3,y+3) != 25))) {
 					if(y-1>=0 && map.getMap(x+1,y-1)==0) {
 						attackX=x+1;
@@ -853,7 +844,7 @@ public class AI {
 					returningNum = 2222;
 				}
 				
-				if(((map.getMap(x,y) == 1) && (map.getMap(x-1,y+1) == 0) && (map.getMap(x-2,y+2) == 1) && (map.getMap(x-3,y+3) == 1)) 	// AI - 1011 ¹æ¾î
+				if(((map.getMap(x,y) == 1) && (map.getMap(x-1,y+1) == 0) && (map.getMap(x-2,y+2) == 1) && (map.getMap(x-3,y+3) == 1)) 	// AI - 1011 ë°©ì–´
 						&& ((map.getBlockedMap(x,y) != 26) && (map.getBlockedMap(x-1,y+1) != 26) && (map.getBlockedMap(x-2,y+2) != 26) && (map.getBlockedMap(x-3,y+3) != 26))) {
 					if(returningNum!=2222 && returningNum!=1111) {
 						if(((y-1>=0 && map.getMap(x+1, y-1)==2) || map.getMap(x-4, y+4)==2) && reCheck==false) {
@@ -869,7 +860,7 @@ public class AI {
 						returningNum = 111;
 					}
 				}
-				if(((map.getMap(x,y) == 1) && (map.getMap(x-1,y+1) == 1) && (map.getMap(x-2,y+2) == 0) && (map.getMap(x-3,y+3) == 1)) 	// AI - 1101 ¹æ¾î, 11011 ¹æ¾î
+				if(((map.getMap(x,y) == 1) && (map.getMap(x-1,y+1) == 1) && (map.getMap(x-2,y+2) == 0) && (map.getMap(x-3,y+3) == 1)) 	// AI - 1101 ë°©ì–´, 11011 ë°©ì–´
 						&& ((map.getBlockedMap(x,y) != 27) && (map.getBlockedMap(x-1,y+1) != 27) && (map.getBlockedMap(x-2,y+2) != 27) && (map.getBlockedMap(x-3,y+3) != 27))) {
 					if(returningNum!=2222 && returningNum!=1111) {
 						if(map.getMap(x-4, y+4)==1) {
@@ -898,7 +889,7 @@ public class AI {
 						}
 					}
 				}
-				if(((map.getMap(x,y) == 2) && (map.getMap(x-1,y+1) == 0) && (map.getMap(x-2,y+2) == 2) && (map.getMap(x-3,y+3) == 2)) 	// AI - 1011 °ø°İ
+				if(((map.getMap(x,y) == 2) && (map.getMap(x-1,y+1) == 0) && (map.getMap(x-2,y+2) == 2) && (map.getMap(x-3,y+3) == 2)) 	// AI - 1011 ê³µê²©
 						&& ((map.getBlockedMap(x,y) != 29) && (map.getBlockedMap(x-1,y+1) != 29) && (map.getBlockedMap(x-2,y+2) != 29) && (map.getBlockedMap(x-3,y+3) != 29))) {
 					if(returningNum!=1111 && returningNum!=2222) {
 						if(((y-1>=0 && map.getMap(x+1, y-1)==1) || map.getMap(x-4, y+4)==1) && reCheck==false) {
@@ -914,7 +905,7 @@ public class AI {
 						returningNum = 222;
 					}
 				}
-				if(((map.getMap(x,y) == 2) && (map.getMap(x-1,y+1) == 2) && (map.getMap(x-2,y+2) == 0) && (map.getMap(x-3,y+3) == 2)) 	// AI - 1101 °ø°İ, 11011 °ø°İ
+				if(((map.getMap(x,y) == 2) && (map.getMap(x-1,y+1) == 2) && (map.getMap(x-2,y+2) == 0) && (map.getMap(x-3,y+3) == 2)) 	// AI - 1101 ê³µê²©, 11011 ê³µê²©
 						&& ((map.getBlockedMap(x,y) != 30) && (map.getBlockedMap(x-1,y+1) != 30) && (map.getBlockedMap(x-2,y+2) != 30) && (map.getBlockedMap(x-3,y+3) != 30))) {
 					if(returningNum!=2222 && returningNum!=1111) {
 						if(map.getMap(x-4, y+4)==2) {
@@ -950,20 +941,20 @@ public class AI {
 	}
 
 	
-	public int CheckRDiagonalForAI() {		// AIÀÇ ¿À¸¥ÂÊ ´ë°¢¼± Ã¼Å© (±âÁØÁ¡À¸·Î ºÎÅÍ ¿À¸¥ÂÊ ¾Æ·¡·Î)
+	public int CheckRDiagonalForAI() {		// AIì˜ ì˜¤ë¥¸ìª½ ëŒ€ê°ì„  ì²´í¬ (ê¸°ì¤€ì ìœ¼ë¡œ ë¶€í„° ì˜¤ë¥¸ìª½ ì•„ë˜ë¡œ)
 		for(int x=0;x<19;x++){
 			if(stopChecking) break;
 			for(int y=0;y<19;y++){
 				if(x+4<=19 && y+4<=19) {
-				if(((map.getMap(x,y) == 1) && (map.getMap(x+1,y+1) == 1) && (map.getMap(x+2,y+2) == 1)) 									// AI - 3¿¬¼Ó Èæµ¹ ¹æ¾î
+				if(((map.getMap(x,y) == 1) && (map.getMap(x+1,y+1) == 1) && (map.getMap(x+2,y+2) == 1)) 									// AI - 3ì—°ì† í‘ëŒ ë°©ì–´
 						&& ((map.getBlockedMap(x,y) != 31) && (map.getBlockedMap(x+1,y+1) != 31) && (map.getBlockedMap(x+2,y+2) != 31))) {
 					if(returningNum!=2222 && returningNum!=1111) {
-						if((x-2>=0 && y-2>=0 && map.getMap(x-2, y-2)==1) && (x-1>=0 && y-1>=0 && map.getMap(x-1,y-1)==0)) {			// 10111 ¹æ¾î
+						if((x-2>=0 && y-2>=0 && map.getMap(x-2, y-2)==1) && (x-1>=0 && y-1>=0 && map.getMap(x-1,y-1)==0)) {			// 10111 ë°©ì–´
 							blockX=x-1;
 							blockY=y-1;
 							returningNum =1111;
 						}
-						else if(map.getMap(x+4,y+4)==1 && map.getMap(x+3,y+3)==0) {		// 11101 ¹æ¾î
+						else if(map.getMap(x+4,y+4)==1 && map.getMap(x+3,y+3)==0) {		// 11101 ë°©ì–´
 							blockX=x+3;
 							blockY=y+3;
 							returningNum =1111;
@@ -972,7 +963,7 @@ public class AI {
 							if(((x-1>=0 && y-1>=0 && map.getMap(x-1, y-1)==2) || map.getMap(x+3, y+3)==2) && reCheck==false) {
 								continue;
 							}
-							if((x-1>=0 && y-1>=0 && map.getMap(x-1,y-1)==0) && map.getMap(x+4, y+4)==2) {		// ÁøÇàÇÏ·Á´Â °÷ ´ÙÀ½ °÷ÀÌ ¸·ÇôÀÖÀ» °æ¿ì ´Ù¸¥ ¹æÇâÀ¸·Î ÁøÇà
+							if((x-1>=0 && y-1>=0 && map.getMap(x-1,y-1)==0) && map.getMap(x+4, y+4)==2) {		// ì§„í–‰í•˜ë ¤ëŠ” ê³³ ë‹¤ìŒ ê³³ì´ ë§‰í˜€ìˆì„ ê²½ìš° ë‹¤ë¥¸ ë°©í–¥ìœ¼ë¡œ ì§„í–‰
 								blockX=x-1;
 								blockY=y-1;
 							}
@@ -999,7 +990,7 @@ public class AI {
 					}
 				}
 				
-				if(((map.getMap(x,y) == 1) && (map.getMap(x+1,y+1) == 1) && (map.getMap(x+2,y+2) == 1) && (map.getMap(x+3,y+3) == 1)) // AI - 4¿¬¼Ó Èæµ¹ ¹æ¾î
+				if(((map.getMap(x,y) == 1) && (map.getMap(x+1,y+1) == 1) && (map.getMap(x+2,y+2) == 1) && (map.getMap(x+3,y+3) == 1)) // AI - 4ì—°ì† í‘ëŒ ë°©ì–´
 						&& ((map.getBlockedMap(x,y) != 32) && (map.getBlockedMap(x+1,y+1) != 32) && (map.getBlockedMap(x+2,y+2) != 32) && (map.getBlockedMap(x+3,y+3) != 32))) {
 					if(returningNum!=2222) {
 						if(x-1>=0 && y-1>=0 && map.getMap(x-1,y-1)==0) {
@@ -1023,7 +1014,7 @@ public class AI {
 				}
 
 				if(((map.getMap(x,y) == 2) && (map.getMap(x+1,y+1) == 2)) &&
-						((map.getBlockedMap(x,y) != 33) && (map.getBlockedMap(x+1,y+1) != 33))) {											// AI - 2¿¬¼Ó ¹éµ¹ °ø°İ
+						((map.getBlockedMap(x,y) != 33) && (map.getBlockedMap(x+1,y+1) != 33))) {											// AI - 2ì—°ì† ë°±ëŒ ê³µê²©
 					if(returningNum==0) {
 						if(((x-1>=0 && y-1>=0 && map.getMap(x-1, y-1)==1) || map.getMap(x+2, y+2)==1) && reCheck==false) {
 							continue;
@@ -1047,14 +1038,14 @@ public class AI {
 				}
 				
 				if(((map.getMap(x,y) == 2) && (map.getMap(x+1,y+1) == 2) && (map.getMap(x+2,y+2) == 2)) &&			
-						((map.getBlockedMap(x,y) != 34) && (map.getBlockedMap(x+1,y+1) != 34) && (map.getBlockedMap(x+2,y+2) != 34)))  {	// AI - 3¿¬¼Ó ¹éµ¹ °ø°İ
+						((map.getBlockedMap(x,y) != 34) && (map.getBlockedMap(x+1,y+1) != 34) && (map.getBlockedMap(x+2,y+2) != 34)))  {	// AI - 3ì—°ì† ë°±ëŒ ê³µê²©
 					if(returningNum!=1111) {
-						if((x-2>=0 && y-2>=0 && map.getMap(x-2, y-2)==2) && (x-1>=0 && y-1>=0 && map.getMap(x-1,y-1)==0)) {			// 10111 °ø°İ
+						if((x-2>=0 && y-2>=0 && map.getMap(x-2, y-2)==2) && (x-1>=0 && y-1>=0 && map.getMap(x-1,y-1)==0)) {			// 10111 ê³µê²©
 							attackX=x-1;
 							attackY=y-1;
 							returningNum =2222;
 						}
-						else if(map.getMap(x+4,y+4)==2 & map.getMap(x+3,y+3)==0) {		// 11101 °ø°İ
+						else if(map.getMap(x+4,y+4)==2 & map.getMap(x+3,y+3)==0) {		// 11101 ê³µê²©
 							attackX=x+3;
 							attackY=y+3;
 							returningNum =2222;
@@ -1063,7 +1054,7 @@ public class AI {
 							if(((x-1>=0 && y-1>=0 && map.getMap(x-1, y-1)==1) || map.getMap(x+3, y+3)==1) && reCheck==false) {
 								continue;
 							}
-							if((x-1>=0 && y-1>=0 && map.getMap(x-1,y-1)==0) && map.getMap(x+4, y+4)==1) {		// ÁøÇàÇÏ·Á´Â °÷ ´ÙÀ½ °÷ÀÌ ¸·ÇôÀÖÀ» °æ¿ì ´Ù¸¥ ¹æÇâÀ¸·Î ÁøÇà
+							if((x-1>=0 && y-1>=0 && map.getMap(x-1,y-1)==0) && map.getMap(x+4, y+4)==1) {		// ì§„í–‰í•˜ë ¤ëŠ” ê³³ ë‹¤ìŒ ê³³ì´ ë§‰í˜€ìˆì„ ê²½ìš° ë‹¤ë¥¸ ë°©í–¥ìœ¼ë¡œ ì§„í–‰
 								attackX=x;
 								attackY=y-1;
 							}
@@ -1090,7 +1081,7 @@ public class AI {
 					}
 				}
 				
-				if(((map.getMap(x,y) == 2) && (map.getMap(x+1,y+1) == 2) && (map.getMap(x+2,y+2) == 2) && (map.getMap(x+3,y+3) == 2)) &&// AI - 4¿¬¼Ó ¹éµ¹ °ø°İ
+				if(((map.getMap(x,y) == 2) && (map.getMap(x+1,y+1) == 2) && (map.getMap(x+2,y+2) == 2) && (map.getMap(x+3,y+3) == 2)) &&// AI - 4ì—°ì† ë°±ëŒ ê³µê²©
 						((map.getBlockedMap(x,y) != 35) && (map.getBlockedMap(x+1,y+1) != 35) && (map.getBlockedMap(x+2,y+2) != 35) && (map.getBlockedMap(x+3,y+3) != 35))) {
 					if(x-1>=0 && y-1>=0 && map.getMap(x-1,y-1)==0) {
 						attackX=x-1;
@@ -1111,7 +1102,7 @@ public class AI {
 					returningNum = 2222;
 				}
 				
-				if(((map.getMap(x,y) == 1) && (map.getMap(x+1,y+1) == 0) && (map.getMap(x+2,y+2) == 1) && (map.getMap(x+3,y+3) == 1)) 	// AI - 1011 ¹æ¾î
+				if(((map.getMap(x,y) == 1) && (map.getMap(x+1,y+1) == 0) && (map.getMap(x+2,y+2) == 1) && (map.getMap(x+3,y+3) == 1)) 	// AI - 1011 ë°©ì–´
 						&& ((map.getBlockedMap(x,y) != 36) && (map.getBlockedMap(x+1,y+1) != 36) && (map.getBlockedMap(x+2,y+2) != 36) && (map.getBlockedMap(x+3,y+3) != 36))) {
 					if(returningNum!=2222 && returningNum!=1111) {
 						if(((x-1>=0 && y-1>=0 && map.getMap(x-1, y-1)==2) || map.getMap(x+4, y+4)==2) && reCheck==false) {
@@ -1127,7 +1118,7 @@ public class AI {
 						returningNum = 111;
 					}
 				}
-				if(((map.getMap(x,y) == 1) && (map.getMap(x+1,y+1) == 1) && (map.getMap(x+2,y+2) == 0) && (map.getMap(x+3,y+3) == 1)) 	// AI - 1101 ¹æ¾î, 11011 ¹æ¾î
+				if(((map.getMap(x,y) == 1) && (map.getMap(x+1,y+1) == 1) && (map.getMap(x+2,y+2) == 0) && (map.getMap(x+3,y+3) == 1)) 	// AI - 1101 ë°©ì–´, 11011 ë°©ì–´
 						&& ((map.getBlockedMap(x,y) != 37) && (map.getBlockedMap(x+1,y+1) != 37) && (map.getBlockedMap(x+2,y+2) != 37) && (map.getBlockedMap(x+3,y+3) != 37))) {
 					if(returningNum!=2222 && returningNum!=1111) {
 						if(map.getMap(x+4, y+4)==1) {
@@ -1156,7 +1147,7 @@ public class AI {
 						}
 					}
 				}
-				if(((map.getMap(x,y) == 2) && (map.getMap(x+1,y+1) == 0) && (map.getMap(x+2,y+2) == 2) && (map.getMap(x+3,y+3) == 2)) 	// AI - 1011 °ø°İ
+				if(((map.getMap(x,y) == 2) && (map.getMap(x+1,y+1) == 0) && (map.getMap(x+2,y+2) == 2) && (map.getMap(x+3,y+3) == 2)) 	// AI - 1011 ê³µê²©
 						&& ((map.getBlockedMap(x,y) != 39) && (map.getBlockedMap(x+1,y+1) != 39) && (map.getBlockedMap(x+2,y+2) != 39) && (map.getBlockedMap(x+3,y+3) != 39))) {
 					if(returningNum!=1111 && returningNum!=2222) {
 						if(((x-1>=0 && y-1>=0 && map.getMap(x-1, y-1)==1) || map.getMap(x+4, y+4)==1) && reCheck==false) {
@@ -1172,7 +1163,7 @@ public class AI {
 						returningNum = 222;
 					}
 				}
-				if(((map.getMap(x,y) == 2) && (map.getMap(x+1,y+1) == 2) && (map.getMap(x+2,y+2) == 0) && (map.getMap(x+3,y+3) == 2)) 	// AI - 1101 °ø°İ, 11011 °ø°İ
+				if(((map.getMap(x,y) == 2) && (map.getMap(x+1,y+1) == 2) && (map.getMap(x+2,y+2) == 0) && (map.getMap(x+3,y+3) == 2)) 	// AI - 1101 ê³µê²©, 11011 ê³µê²©
 						&& ((map.getBlockedMap(x,y) != 40) && (map.getBlockedMap(x+1,y+1) != 40) && (map.getBlockedMap(x+2,y+2) != 40) && (map.getBlockedMap(x+3,y+3) != 40))) {
 					if(returningNum!=2222 && returningNum!=1111) {
 						if(map.getMap(x+4, y+4)==2) {
