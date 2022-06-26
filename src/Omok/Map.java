@@ -12,11 +12,11 @@ public class Map extends JPanel {
 	public Image blackStoneR = new ImageIcon(Main.class.getResource("../images/blackR.png")).getImage();
 	public Image whiteStoneR = new ImageIcon(Main.class.getResource("../images/whiteR.png")).getImage();
 	
-	public static short[][] map;		// Èæµ¹=1 , ¹éµ¹=2
-	public static short[][] blockedMap;	// AI µ¿ÀÛ ½Ã ÇÊ¿äÇÑ ¸Ê Ã¼Å©
+	public static short[][] map;		// í‘ëŒ=1 , ë°±ëŒ=2
+	public static short[][] blockedMap;	// AI ë™ì‘ ì‹œ í•„ìš”í•œ ë§µ ì²´í¬
 	public boolean isBlack=true;
 	public boolean isWhite=false;
-	public boolean endTurn=false;	// ¾µ¸ğ ¾øÀ» µí
+	public boolean endTurn=false;	// ì“¸ëª¨ ì—†ì„ ë“¯
 	public int recentX=0;
 	public int recentY=0;
 	
@@ -54,13 +54,13 @@ public class Map extends JPanel {
 	public void screenDraw(Graphics g) {
 		for(int x=0;x<25;x++){
 			for(int y=0;y<25;y++){
-				if(getMap(x, y) == 1 && (x == recentX && y == recentY)) {			// Á¦ÀÏ ÃÖ±Ù ³õÀº µ¹À» Ç¥½ÃÇÏ±â À§ÇÑ ÄÚµå
+				if(getMap(x, y) == 1 && (x == recentX && y == recentY)) {			// ì œì¼ ìµœê·¼ ë†“ì€ ëŒì„ í‘œì‹œí•˜ê¸° ìœ„í•œ ì½”ë“œ
 					g.drawImage(blackStoneR, (x+1)*30-13, (y+2)*30-13, null);
 				}
 				else if(getMap(x, y) == 2 && (x == recentX && y == recentY)) {
 					g.drawImage(whiteStoneR, (x+1)*30-13, (y+2)*30-13, null);
 				}
-				else {																// ÀÌÀü µ¹Àº ´Ù½Ã ¿ø·¡ ÀÌ¹ÌÁö·Î ¹Ù²Ş
+				else {										// ì´ì „ ëŒì€ ë‹¤ì‹œ ì›ë˜ ì´ë¯¸ì§€ë¡œ ë°”ê¿ˆ
 					if(getMap(x, y) == 1) {			
 						g.drawImage(blackStone, (x+1)*30-13, (y+2)*30-13, null);
 					}
@@ -94,7 +94,7 @@ public class Map extends JPanel {
 		isWhite=false;
 	}
 	
-	public int CheckWin() {			// ¾Æ·¡ 4°³ÀÇ Ã¼Å© ÇÔ¼ö¸¦ Á¾ÇÕÇÏ¿© ÀÌ°å´ÂÁö Ã¼Å©
+	public int CheckWin() {			// ì•„ë˜ 4ê°œì˜ ì²´í¬ í•¨ìˆ˜ë¥¼ ì¢…í•©í•˜ì—¬ ì´ê²¼ëŠ”ì§€ ì²´í¬
 		if (CheckField()==1 || CheckRecord ()==1 || CheckLDiagonal()==1 || CheckRDiagonal()==1) {
 			return 1;
 		}
@@ -104,22 +104,22 @@ public class Map extends JPanel {
 		return 0;
 	}
 	
-	public int CheckField() {		// Çà Ã¼Å© (±âÁØÁ¡À¸·Î ºÎÅÍ ¾Æ·¡·Î)
+	public int CheckField() {		// í–‰ ì²´í¬ (ê¸°ì¤€ì ìœ¼ë¡œ ë¶€í„° ì•„ë˜ë¡œ)
 		for(int x=0;x<19;x++){
 			for(int y=0;y<15;y++){
 				if((getMap(x,y) == 1) && (getMap(x,y+1) == 1) && (getMap(x,y+2) == 1)
-						&& (getMap(x,y+3) == 1) && (getMap(x,y+4) == 1)) {	// Èæµ¹ ½Â¸®
+						&& (getMap(x,y+3) == 1) && (getMap(x,y+4) == 1)) {	// í‘ëŒ ìŠ¹ë¦¬
 					return 1;
 				}
 				if((getMap(x,y) == 2) && (getMap(x,y+1) == 2) && (getMap(x,y+2) == 2)
-						&& (getMap(x,y+3) == 2) && (getMap(x,y+4) == 2)) {	// ¹éµ¹ ½Â¸®
+						&& (getMap(x,y+3) == 2) && (getMap(x,y+4) == 2)) {	// ë°±ëŒ ìŠ¹ë¦¬
 					return 2;
 				}
 			}
 		}
 		return 0;
 	}
-	public int CheckRecord() {		// ¿­ Ã¼Å© (±âÁØÁ¡À¸·Î ºÎÅÍ ¿À¸¥ÂÊÀ¸·Î)
+	public int CheckRecord() {		// ì—´ ì²´í¬ (ê¸°ì¤€ì ìœ¼ë¡œ ë¶€í„° ì˜¤ë¥¸ìª½ìœ¼ë¡œ)
 		for(int x=0;x<15;x++){
 			for(int y=0;y<19;y++){
 				if((getMap(x,y) == 1) && (getMap(x+1,y) == 1) && (getMap(x+2,y) == 1)
@@ -134,7 +134,7 @@ public class Map extends JPanel {
 		}
 		return 0;
 	}
-	public int CheckLDiagonal() {	// ¿ŞÂÊ ´ë°¢¼± Ã¼Å© (±âÁØÁ¡À¸·Î ºÎÅÍ ¿ŞÂÊ ¾Æ·¡·Î)
+	public int CheckLDiagonal() {	// ì™¼ìª½ ëŒ€ê°ì„  ì²´í¬ (ê¸°ì¤€ì ìœ¼ë¡œ ë¶€í„° ì™¼ìª½ ì•„ë˜ë¡œ)
 		for(int x=0;x<19;x++){
 			for(int y=0;y<19;y++){
 				if(x-4>0 && y+4<19){
@@ -151,7 +151,7 @@ public class Map extends JPanel {
 		}
 		return 0;
 	}
-	public int CheckRDiagonal() {	// ¿À¸¥ÂÊ ´ë°¢¼± Ã¼Å© (±âÁØÁ¡À¸·Î ºÎÅÍ ¿À¸¥ÂÊ ¾Æ·¡·Î)
+	public int CheckRDiagonal() {	// ì˜¤ë¥¸ìª½ ëŒ€ê°ì„  ì²´í¬ (ê¸°ì¤€ì ìœ¼ë¡œ ë¶€í„° ì˜¤ë¥¸ìª½ ì•„ë˜ë¡œ)
 		for(int x=0;x<19;x++){
 			for(int y=0;y<19;y++){
 				if(x+4<19 && y+4<19) {
