@@ -23,13 +23,7 @@ public class AI {
 	}
 	
 	public void alphaOh() {					// state로 인공지능의 상태를 나눠 상태별로 할 수 있는 행동을 하게 하는 함수 (AI 종합 컨트롤 함수)
-		/*	// ** 여기다 하면 0.5초 뒤에  흑돌이랑 같이 나옴 (백돌만 느리게 나와야 함) **
-		try{
-			Thread.sleep(500);
-		}catch(Exception e){
-			e.printStackTrace();
-		}		
-		*/
+
 		//if(map.endTurn == true) {
 			currentAI = CheckAI();			// 현재 맵을 스캔하여 나온 값에 따라 행동
 			if(reCheck==true)
