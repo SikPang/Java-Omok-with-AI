@@ -23,7 +23,6 @@ public class AI {
 	}
 	
 	public void alphaOh() {					// state로 인공지능의 상태를 나눠 상태별로 할 수 있는 행동을 하게 하는 함수 (AI 종합 컨트롤 함수)
-
 		//if(map.endTurn == true) {
 			currentAI = CheckAI();			// 현재 맵을 스캔하여 나온 값에 따라 행동
 			if(reCheck==true)
