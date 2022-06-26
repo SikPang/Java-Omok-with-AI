@@ -42,12 +42,12 @@
   
  ## Screen Shots
  
-<img src="https://user-images.githubusercontent.com/87380790/126421346-6d0ad9db-6c39-4665-99c8-d055682ab39d.PNG" width="80%">
+<img src="https://user-images.githubusercontent.com/87380790/126421346-6d0ad9db-6c39-4665-99c8-d055682ab39d.PNG" width="70%">
  
 > 막강한 싱글플레이 AI에게 도전해서 이겨보세요!
  
 <br/>
   
-<img src="https://user-images.githubusercontent.com/87380790/126421335-ab6bb91b-4021-44a6-98fe-178ac02031fa.PNG" width="80%">
+<img src="https://user-images.githubusercontent.com/87380790/126421335-ab6bb91b-4021-44a6-98fe-178ac02031fa.PNG" width="70%">
 
 > 멀티플레이에서 친구와 함께!
