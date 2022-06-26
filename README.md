@@ -4,7 +4,7 @@
 > 오목 게임 (2019. 06 ~ 2020. 02) <br/>
 > Java Swing <br/>
 
-<img src="https://user-images.githubusercontent.com/87380790/126421090-a9d87bef-41db-43bb-a3f8-8ea037608ea4.PNG" width="80%">
+<img src="https://user-images.githubusercontent.com/87380790/126421090-a9d87bef-41db-43bb-a3f8-8ea037608ea4.PNG" width="70%">
  
 <br/>
 <br/>
@@ -12,7 +12,7 @@
   
 ## 1. 싱글 플레이 with AI
 > 플레이어가 취하는 행동에 따라 공격, 수비하는 AI(싱글플레이) 지원
-<img src="https://user-images.githubusercontent.com/87380790/175806295-2556b1d8-1f95-4983-b71d-c070fb416f8f.gif" width="90%">
+<img src="https://user-images.githubusercontent.com/87380790/175821755-d6c4935d-4dde-443e-996f-62391710781d.gif" width="70%">
   
 <br/>
 <br/>
@@ -20,7 +20,7 @@
   
 ## 2. 멀티 플레이
 > 번갈아가면서 수를 둘 수 있는 멀티플레이 지원 (오프라인)
-<img src="https://user-images.githubusercontent.com/87380790/175806363-1418447d-c390-478d-b673-ccfa4e6ac870.gif" width="90%">
+<img src="https://user-images.githubusercontent.com/87380790/175821828-7dfd39af-d323-470e-966a-e2f629042c2d.gif" width="70%">
   
  <br/>
 <br/>
