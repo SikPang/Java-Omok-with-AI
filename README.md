@@ -1,7 +1,8 @@
 
   
 # Java_Omok
-> Java Swing 오목 게임 (2019. 06 ~ 2020. 02)
+> 오목 게임 (2019. 06 ~ 2020. 02) <br/>
+> Java Swing <br/>
 
 <img src="https://user-images.githubusercontent.com/87380790/126421090-a9d87bef-41db-43bb-a3f8-8ea037608ea4.PNG" width="80%">
  
