@@ -12,7 +12,7 @@
   
 ## 1. 싱글 플레이 with AI
 > 플레이어가 취하는 행동에 따라 공격, 수비하는 AI(싱글플레이) 지원
-<img src="https://user-images.githubusercontent.com/87380790/175821755-d6c4935d-4dde-443e-996f-62391710781d.gif" width="70%">
+<img src="https://user-images.githubusercontent.com/87380790/175821755-d6c4935d-4dde-443e-996f-62391710781d.gif" width="80%">
   
 <br/>
 <br/>
@@ -20,7 +20,7 @@
   
 ## 2. 멀티 플레이
 > 번갈아가면서 수를 둘 수 있는 멀티플레이 지원 (오프라인)
-<img src="https://user-images.githubusercontent.com/87380790/175821828-7dfd39af-d323-470e-966a-e2f629042c2d.gif" width="70%">
+<img src="https://user-images.githubusercontent.com/87380790/175821828-7dfd39af-d323-470e-966a-e2f629042c2d.gif" width="80%">
   
  <br/>
 <br/>
